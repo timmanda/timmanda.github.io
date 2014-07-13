@@ -93,53 +93,52 @@
             });
         }
 
-        jQuery(document).ready(function($){
-            var deviceAgent = navigator.userAgent.toLowerCase();
-            var agentID = deviceAgent.match(/(ipad|iphone|ipod)/i);
-            if (agentID) {
-                window.addEventListener('DOMContentLoaded',function() {
-                    //The magic code to add show/hide custom event triggers
-                    (function ($) {
-                        $.each(['pageshow', 'pagehide'], function (i, ev) {
-                            var el = $.fn[ev];
-                            $.fn[ev] = function () {
-                                this.trigger(ev);
-                                return el.apply(this, arguments);
-                            };
-                        });
-                    })(jQuery);
-
-                    $("#bookentry").on('pageshow', function() {
-                        //alert("Hi");
-                        listbooks();
+        var deviceAgent = navigator.userAgent.toLowerCase();
+        var agentID = deviceAgent.match(/(ipad|iphone|ipod)/i);
+        if (agentID) {
+            window.addEventListener('DOMContentLoaded',function() {
+                //The magic code to add show/hide custom event triggers
+                (function ($) {
+                    $.each(['pageshow', 'pagehide'], function (i, ev) {
+                        var el = $.fn[ev];
+                        $.fn[ev] = function () {
+                            this.trigger(ev);
+                            return el.apply(this, arguments);
+                        };
                     });
+                })(jQuery);
 
-                    DocReady();
+                $("#bookentry").on('pageshow', function() {
+                    //alert("Hi");
+                    listbooks();
                 });
-            }
-            else
-            {
-                $(document).ready(function () {
-                    //The magic code to add show/hide custom event triggers
-                    (function ($) {
-                        $.each(['show', 'hide'], function (i, ev) {
-                            var el = $.fn[ev];
-                            $.fn[ev] = function () {
-                                this.trigger(ev);
-                                return el.apply(this, arguments);
-                            };
-                        });
-                    })(jQuery);
 
-                    $("#bookentry").on('show', function() {
-                        //alert("Hi");
-                        listbooks();
+                DocReady();
+            });
+        }
+        else
+        {
+            alert('Not an ipad/iphone/ipod');
+            $(document).ready(function () {
+                //The magic code to add show/hide custom event triggers
+                (function ($) {
+                    $.each(['show', 'hide'], function (i, ev) {
+                        var el = $.fn[ev];
+                        $.fn[ev] = function () {
+                            this.trigger(ev);
+                            return el.apply(this, arguments);
+                        };
                     });
+                })(jQuery);
 
-                    DocReady();
+                $("#bookentry").on('show', function() {
+                    //alert("Hi");
+                    listbooks();
                 });
-            }
-        });
+
+                DocReady();
+            });
+        }
     </script>
 </body>
 </html>
