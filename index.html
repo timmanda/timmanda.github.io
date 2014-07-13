@@ -80,11 +80,13 @@
             }
 
             $("#loginbtn").click(function () {
-                localStorage.timmanda_username = $("#login_username").val();
+/*                localStorage.timmanda_username = $("#login_username").val();
                 localStorage.timmanda_password = $("#login_password").val();
 
                 $("#bookentry").slideToggle('slow', listbooks());
-                $("#loginentry").fadeOut('slow');
+                $("#loginentry").fadeOut('slow');*/
+
+                $("#loginentry").html("Hi Amanda");
 
                 event.preventDefault();
             });
