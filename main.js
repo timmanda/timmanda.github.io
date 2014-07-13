@@ -1,1 +1,5 @@
-var idx = 0;
+function submitMe()
+{
+    alert("I've been submitted");
+    return false;
+}

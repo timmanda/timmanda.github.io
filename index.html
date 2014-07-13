@@ -10,15 +10,26 @@
 
 <body>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 
-<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+    <script src="main.js"></script>
 
-<script src="main.js"></script>
-
-<h1>Hello World!</h1>
-
+    <form id="bookform">
+        <table style="width:300px">
+            <tr>
+                <td align="right" style="width:10%">Author:</td> <td><input type="text" name="authorname" style="width:100%"></td>
+            </tr>
+            <tr>
+                <td align="right" style="width:10%">Book:</td> <td><input type="text" name="bookname" style="width:100%"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" onclick="return submitMe();"></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
