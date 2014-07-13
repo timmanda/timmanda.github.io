@@ -25,7 +25,7 @@
 
     <script src="main.js"></script>
 
-    <div id="bookentry">
+    <div id="bookentry" style="display: none;">
         <form id="bookform">
             <table style="width:300px">
                 <tr>
@@ -70,19 +70,29 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $("#bookentry").hide();
-
-            $("#bookentry").on('show', function() {
-                listbooks();
+        //The magic code to add show/hide custom event triggers
+        (function ($) {
+            $.each(['show', 'hide'], function (i, ev) {
+                var el = $.fn[ev];
+                $.fn[ev] = function () {
+                    this.trigger(ev);
+                    return el.apply(this, arguments);
+                };
             });
+        })(jQuery);
 
+        $("#bookentry").on('show', function() {
+            //alert("Hi");
+            listbooks();
+        });
+
+        $(document).ready(function () {
             if (localStorage.timmanda_username && localStorage.timmanda_password)
             {
                 //$("#bookentry").slideToggle('slow', listbooks());
                 //$("#loginentry").fadeOut('slow');
-                $("#bookentry").show();
                 $("#loginentry").hide();
+                $("#bookentry").show();
             }
 
             $("#loginbtn").click(function () {
@@ -91,8 +101,8 @@
 
                 //$("#bookentry").slideToggle('slow', listbooks());
                 //$("#loginentry").fadeOut('slow');
-                $("#bookentry").show();
                 $("#loginentry").hide();
+                $("#bookentry").show();
 
                 event.preventDefault();
             });
