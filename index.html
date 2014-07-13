@@ -7,6 +7,13 @@
     <script src="js/modernizr.js"></script>
     <script src="js/pouchdb-2.2.3.min.js"></script>
 
+    <style>
+    table,th,td
+    {
+    border:1px solid black;
+    border-collapse:collapse;
+    }
+    </style>
 </head>
 
 <body>
@@ -23,25 +30,22 @@
             <table style="width:300px">
                 <tr>
                     <td align="right" style="width:10%">Author:</td>
-                    <td><input type="text" name="authorname" style="width:100%"></td>
+                    <td><input type="text" id="authorname" style="width:98%"></td>
                 </tr>
                 <tr>
                     <td align="right" style="width:10%">Book:</td>
-                    <td><input type="text" name="bookname" style="width:100%"></td>
+                    <td><input type="text" id="bookname" style="width:98%"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="Submit" onclick="return submitMe();"></td>
-                </tr>
-
-                <tr>
-                    <td></td>
+                    <td><input type="submit" value="Submit" onclick="return addbook();"></td>
                 </tr>
             </table>
         </form>
-        <table>
+        <table style="width:300px;border-width:1px" id="booklist">
             <tr>
-                <td> <div id="booklist"></div> </td>
+                <th style="width:30%">Author</th>
+                <th>Book</th>
             </tr>
         </table>
     </div>
@@ -51,11 +55,11 @@
             <table style="width:300px">
                 <tr>
                     <td align="right" style="width:10%">Username:</td>
-                    <td><input type="text" id="login_username" style="width:100%"></td>
+                    <td><input type="text" id="login_username" style="width:98%"></td>
                 </tr>
                 <tr>
                     <td align="right" style="width:10%">Password:</td>
-                    <td><input type="password" id="login_password" style="width:100%"></td>
+                    <td><input type="password" id="login_password" style="width:98%"></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -68,27 +72,24 @@
     <script>
         $(document).ready(function () {
             $("#bookentry").hide();
-            if (!localStorage.timmanda_username || !localStorage.timmanda_password)
-            {
-                $("#loginbtn").click(function () {
-                    localStorage.timmanda_username = $("#login_username").val();
-                    localStorage.timmanda_password = $("#login_password").val();
 
-                    $("#bookentry").slideToggle('slow', listbooks());
-                    $("#loginentry").fadeOut('slow');
-
-                    event.preventDefault();
-                });
-            }
-            else
+            if (localStorage.timmanda_username && localStorage.timmanda_password)
             {
                 $("#bookentry").slideToggle('slow', listbooks());
                 $("#loginentry").fadeOut('slow');
             }
-        });
 
-        $("#bookentry").on('show', function() {
-        })
+            $("#loginbtn").click(function () {
+                localStorage.timmanda_username = $("#login_username").val();
+                localStorage.timmanda_password = $("#login_password").val();
+
+                $("#bookentry").slideToggle('slow', listbooks());
+                $("#loginentry").fadeOut('slow');
+
+                event.preventDefault();
+            });
+
+        });
     </script>
 </body>
 </html>

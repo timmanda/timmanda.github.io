@@ -31,11 +31,13 @@ function listbooks()
         {
             if (resp.total_rows > 0)
             {
-                var mytext = "";
+                var mytext = booklistelem.html();
                 resp.rows.forEach(
                     function (entry) {
-                        //booklistelem.html(entry.doc.author + '<br>' + entry.doc.book);
-                        mytext += entry.doc.author + ' : ' + entry.doc.book + '<br>'
+                        mytext += '<tr>';
+                        mytext += '<td align="right" style="width:30%">' + entry.doc.author + '</td>';
+                        mytext += '<td>' + entry.doc.book + '</td>';
+                        mytext += '</tr>';
                     }
                 );
 
@@ -45,8 +47,18 @@ function listbooks()
     });
 }
 
-function submitMe()
+function addbook()
 {
+    var authorstr = $("#authorname").val();
+    var bookstr   = $("#bookname").val();
+    if (authorstr && bookstr)
+    {
+        db.post({
+            author : authorstr,
+            book : bookstr
+        }, function (err,resp) {  });
+    }
+
     return false;
 }
 
