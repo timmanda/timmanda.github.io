@@ -5,6 +5,7 @@
     <title>Test Document</title>
 
     <script src="js/modernizr.js"></script>
+    <script src="js/pouchdb-2.2.3.min.js"></script>
 
 </head>
 
@@ -17,19 +18,67 @@
 
     <script src="main.js"></script>
 
-    <form id="bookform">
-        <table style="width:300px">
-            <tr>
-                <td align="right" style="width:10%">Author:</td> <td><input type="text" name="authorname" style="width:100%"></td>
-            </tr>
-            <tr>
-                <td align="right" style="width:10%">Book:</td> <td><input type="text" name="bookname" style="width:100%"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Submit" onclick="return submitMe();"></td>
-            </tr>
-        </table>
-    </form>
+    <div id="bookentry">
+        <form id="bookform">
+            <table style="width:300px">
+                <tr>
+                    <td align="right" style="width:10%">Author:</td>
+                    <td><input type="text" name="authorname" style="width:100%"></td>
+                </tr>
+                <tr>
+                    <td align="right" style="width:10%">Book:</td>
+                    <td><input type="text" name="bookname" style="width:100%"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Submit" onclick="return submitMe();"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="loginentry">
+        <form id="loginform">
+            <table style="width:300px">
+                <tr>
+                    <td align="right" style="width:10%">Username:</td>
+                    <td><input type="text" name="usernane" id="login_username" style="width:100%"></td>
+                </tr>
+                <tr>
+                    <td align="right" style="width:10%">Password:</td>
+                    <td><input type="password" name="password" id="login_password" style="width:100%"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Submit" id="loginbtn"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var username = localStorage.timmanda_username;
+            var password = localStorage.timmanda_password;
+
+            if (!username || !password)
+            {
+                $("#bookentry").hide();
+                $("#loginbtn").click(function () {
+                    localStorage.timmanda_username = $("#login_username").val();
+                    localStorage.timmanda_password = $("#login_password").val();
+
+                    $("#bookentry").slideToggle('slow');
+                    $("#loginentry").fadeOut('slow');
+
+                    event.preventDefault();
+                });
+            }
+            else
+            {
+                $("#loginentry").hide();
+            }
+        });
+    </script>
 </body>
 </html>
