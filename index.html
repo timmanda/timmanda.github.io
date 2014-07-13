@@ -6,6 +6,10 @@
 
     <script src="js/modernizr.js"></script>
     <script src="js/pouchdb-2.2.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"/>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
 
     <style>
     table,th,td
@@ -18,10 +22,12 @@
 
 <body>
 
+    <!--
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+    -->
 
     <script src="main.js"></script>
 
@@ -70,75 +76,26 @@
     </div>
 
     <script>
-        function DocReady()
-        {
+        $(document).ready(function () {
+            var logent  = $('#loginentry');
+            var bookent = $('#bookentry');
+
             if (localStorage.timmanda_username && localStorage.timmanda_password)
             {
-                //$("#bookentry").slideToggle('slow', listbooks());
-                //$("#loginentry").fadeOut('slow');
-                $("#loginentry").hide();
-                $("#bookentry").show();
+                logent.hide();
+                bookent.show(0, listbooks());
             }
 
             $("#loginbtn").click(function () {
-                localStorage.timmanda_username = $("#login_username").val();
-                localStorage.timmanda_password = $("#login_password").val();
+                localStorage.timmanda_username = $('#login_username').val();
+                localStorage.timmanda_password = $('#login_password').val();
 
-                //$("#bookentry").slideToggle('slow', listbooks());
-                //$("#loginentry").fadeOut('slow');
-                $("#loginentry").hide();
-                $("#bookentry").show();
+                logent.hide();
+                bookent.show(0, listbooks());
 
                 event.preventDefault();
             });
-        }
-
-        var deviceAgent = navigator.userAgent.toLowerCase();
-        var agentID = deviceAgent.match(/(ipad|iphone|ipod)/i);
-        if (agentID) {
-            window.addEventListener('DOMContentLoaded',function() {
-                //The magic code to add show/hide custom event triggers
-                (function ($) {
-                    $.each(['pageshow', 'pagehide'], function (i, ev) {
-                        var el = $.fn[ev];
-                        $.fn[ev] = function () {
-                            this.trigger(ev);
-                            return el.apply(this, arguments);
-                        };
-                    });
-                })(jQuery);
-
-                $("#bookentry").on('pageshow', function() {
-                    //alert("Hi");
-                    listbooks();
-                });
-
-                DocReady();
-            });
-        }
-        else
-        {
-            alert('Not an ipad/iphone/ipod');
-            $(document).ready(function () {
-                //The magic code to add show/hide custom event triggers
-                (function ($) {
-                    $.each(['show', 'hide'], function (i, ev) {
-                        var el = $.fn[ev];
-                        $.fn[ev] = function () {
-                            this.trigger(ev);
-                            return el.apply(this, arguments);
-                        };
-                    });
-                })(jQuery);
-
-                $("#bookentry").on('show', function() {
-                    //alert("Hi");
-                    listbooks();
-                });
-
-                DocReady();
-            });
-        }
+        });
     </script>
 </body>
 </html>
