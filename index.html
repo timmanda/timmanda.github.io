@@ -73,22 +73,29 @@
         $(document).ready(function () {
             $("#bookentry").hide();
 
-            $("#loginbtn").click(function () {
-                localStorage.timmanda_username = $("#login_username").val();
-                localStorage.timmanda_password = $("#login_password").val();
-
-                /*
-                 $("#bookentry").slideToggle('slow', listbooks());
-                 $("#loginentry").fadeOut('slow');*/
-
-                event.preventDefault();
+            $("#bookentry").on('show', function() {
+                listbooks();
             });
 
             if (localStorage.timmanda_username && localStorage.timmanda_password)
             {
-                $("#bookentry").slideToggle('slow', listbooks());
-                $("#loginentry").fadeOut('slow');
+                //$("#bookentry").slideToggle('slow', listbooks());
+                //$("#loginentry").fadeOut('slow');
+                $("#bookentry").show();
+                $("#loginentry").hide();
             }
+
+            $("#loginbtn").click(function () {
+                localStorage.timmanda_username = $("#login_username").val();
+                localStorage.timmanda_password = $("#login_password").val();
+
+                //$("#bookentry").slideToggle('slow', listbooks());
+                //$("#loginentry").fadeOut('slow');
+                $("#bookentry").show();
+                $("#loginentry").hide();
+
+                event.preventDefault();
+            });
         });
     </script>
 </body>
